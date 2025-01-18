@@ -533,6 +533,7 @@
                         <div class="sejarah-item mb-5 p-4 position-relative">
                             <div class="sejarah-image text-center my-4">
                                 <img src="{{ asset('storage/' . $item->foto) }}" alt="Geografis" class="img-fluid">
+                                <img src="https://res.cloudinary.com/ddano72vg/image/upload/v1736400932/Desain_tanpa_judul_1_n7v85i.png" alt="test" class="img-fluid">
                             </div>
                             <div class="sejarah-text short-text">
                                 {{ $item->deskripsi }}
