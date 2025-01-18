@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Sejarah;
 use App\Models\Profile;
 use App\Models\Geografis;
@@ -11,32 +10,27 @@ use App\Models\UMKM;
 use App\Models\Wisata;
 use App\Models\Aparatur;
 use App\Models\DiagramAparatur;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        try {
-            // Retrieve data from database
+            // Retrieve all Sejarah, Geografis, and Berita records from the database
             $sejarah = Sejarah::all();
             $geografis = Geografis::all();
             $keuangans = KeuanganDesa::all();
-            $beritas = Berita::orderBy('tanggal', 'desc')->paginate(10);
+            $beritas = Berita::orderBy('tanggal', 'desc')->get(); // Ambil data berita terbaru
             $umkms = UMKM::all();
             $wisatas = Wisata::all();
             $aparatur = Aparatur::all();
             $diagram = DiagramAparatur::first();
 
-            // Return view with data
+            $beritas = Berita::orderBy('tanggal', 'desc')->paginate(10);
+            // Pass all data to the view
             return view('profil', compact('sejarah', 'geografis', 'beritas', 'keuangans', 'umkms', 'wisatas', 'aparatur', 'diagram'));
-        } catch (\Exception $e) {
-            Log::error('Database error: ' . $e->getMessage());
-            return abort(500, 'Internal Server Error. Please check your database connection.');
-        }
     }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -45,7 +39,7 @@ class ProfileController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $path = $request->hasFile('image') ? $request->file('image')->store('profiles', 'public') : null;
+        $path = $request->file('image')?->store('profiles', 'public');
 
         Profile::create([
             'title' => $validated['title'],
@@ -69,7 +63,10 @@ class ProfileController extends Controller
             $profile->update(['image' => $path]);
         }
 
-        $profile->update($validated);
+        $profile->update([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+        ]);
 
         return redirect()->route('profiles.index')->with('success', 'Profile updated successfully.');
     }
@@ -79,4 +76,5 @@ class ProfileController extends Controller
         $profile->delete();
         return redirect()->route('profiles.index')->with('success', 'Profile deleted successfully.');
     }
+
 }
