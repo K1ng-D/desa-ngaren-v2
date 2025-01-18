@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: inline;
+}
+
+.jumbotron {
+    font-size: 20px;
+    padding: 4px ;
+    text-align: center;
+    background-color: #e03a1c;
+    color: white;
+}
+
+
+nav {
+    background-color: #c62100;
+    padding: 5px;
+    height: 65px;
+    position: sticky;
+    top: 0;
+}
+
+nav ul {
+    padding-inline: 4rem;
+    display: flex;
+    gap: 2rem;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+nav a:hover {
+    font-weight: bold;
+}
+
+nav ul li .dropdown {
+    display: none;
+}
+
+nav ul li .dropdown  li{
+    display: block;
+    padding: 10px;
+}
+
+nav ul li:hover .dropdown {
+    display: block;
+    background-color: #861903;
+    position: absolute;
+    padding: 10px;
+}
+
+
+main {
+    padding: 20px;
+    display: flex;
+    gap: 1.5rem;
+}
+
+#content {
+    flex: 5;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem 2rem;
+}
+
+.card { 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: justify;
+}
+
+.imgSejarah {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    object-position:center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #c60606;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+
+#wstalam h2{
+    padding-top: 50px;
+    border-top: 1px solid black;
+}
+
+#wstbudaya {
+    padding-top: 50px;
+}
+
+aside {
+    flex: 1;
+}
+
+.portofile header {
+    text-align: center;
+}
+
+.portofile p {
+    text-align: center;
+}
+
+footer {
+    padding: 18px;
+    color: white;
+    background-color: #555; 
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+
+/* Perangkat dg lebar layar 1200px dan di bawahnya */
+@media screen and (max-width: 1200px) {
+    main {
+        flex-flow: column nowrap;
+    }
+
+    main aside {
+        align-self: center;
+    }
+}
+
+/* Perangkat dg lebar layar 768px dan di bawahnya */
+@media screen and (max-width: 768px) {
+    nav ul {
+        justify-content: center;
+    }
+
+    main aside {
+        align-self: stretch;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    #content,
+    aside {
+        width: 100%;
+        padding: 0;
+    }
+    
+}
